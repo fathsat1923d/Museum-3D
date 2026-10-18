@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Koleksi 3D — Museum Brawijaya</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    :root { --ink:#1a1a1a; --bg:#f4f1ea; --accent:#7a1f1f; }
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; height:100%; background:var(--bg); color:var(--ink);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    header { padding:14px 18px; background:var(--accent); color:#fff; }
+    header h1 { margin:0; font-size:1.25rem; }
+    header p { margin:4px 0 0; font-size:0.95rem; opacity:.95; }
+    main { padding:16px; max-width:760px; margin:0 auto; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px; }
+    a.card { display:block; padding:20px 14px; background:#fff; border-radius:14px;
+      text-decoration:none; color:var(--ink); text-align:center; font-size:1.1rem; font-weight:600;
+      box-shadow:0 2px 8px rgba(0,0,0,.08); min-height:44px; }
+    a.card:active { background:#f0e9df; }
+    .hint { text-align:center; color:#555; font-size:.95rem; margin:18px 0 4px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Koleksi 3D Museum Brawijaya</h1>
+    <p>Pilih benda untuk dilihat dari segala arah</p>
+  </header>
+  <main>
+    <div class="grid" id="grid"></div>
+    <p class="hint">Sentuh gambar untuk memutar • Cubit untuk memperbesar</p>
+  </main>
+
+  <script>
+    // EDIT DAFTAR INI sesuai aset dan nama aslinya.
+    const ARTIFACTS = [
+      { id: "A01", name: "Palu" },
+      { id: "A02", name: "Stampel PKI" },
+      { id: "A03", name: "Stampel Teritorium" },
+      { id: "A04", name: "Stampel Tanda Tangan" },
+      { id: "A05", name: "Perban Luka" },
+      { id: "A06", name: "Teropong" },
+      { id: "A07", name: "Magasin Kecil" },
+      { id: "A08", name: "Magasin Panjang" },
+      { id: "A09", name: "Senter Hongkong Steamboat" },
+      { id: "A10", name: "Flare Gun" },
+      { id: "A11", name: "Senapan M1911" },
+      { id: "A12", name: "Lugar Pistol" },
+      { id: "A13", name: "Revolver" },
+      { id: "A14", name: "Pistol Kayu" },
+      { id: "A15", name: "Granat" },
+      { id: "A16", name: "Pisau Kecil" },
+      { id: "A17", name: "Pisau Golok" },
+      { id: "A18", name: "Jarum Suntik" },
+      { id: "A19", name: "Pin Mao Zedong" },
+      { id: "A20", name: "Radio" },
+      { id: "A21", name: "Mesin Stensil" }
+    ];
+    const grid = document.getElementById("grid");
+    grid.innerHTML = ARTIFACTS.map(a => `
+      <a class="card" href="viewer.html?id=${a.id}&name=${encodeURIComponent(a.name)}"
+         aria-label="Lihat ${a.name} dalam 3D">${a.name}</a>
+    `).join("");
+  </script>
+</body>
+</html>
