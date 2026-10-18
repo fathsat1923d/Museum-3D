@@ -67,7 +67,7 @@
     document.getElementById("fallbackImg").src = `${base}/${id}.jpg`;
 
     // coba beberapa lokasi (folder models/ atau root) agar tahan beda struktur
-    const candidates = [...new Set([`${base}/${id}.glb`, `${id}.glb`, `models/${id}.glb`])];
+    const candidates = [...new Set([`${id}.glb`, `${base}/${id}.glb`, `models/${id}.glb`])];
     let ci = 0;
     function showFallback() {
       document.getElementById("fallback").style.display = "block";
