@@ -62,15 +62,23 @@
     document.title = name + " — Museum Brawijaya";
 
     const mv = document.getElementById("mv");
-    mv.setAttribute("src", `${base}/${id}.glb`);
     mv.setAttribute("ios-src", `${base}/${id}.usdz`);
     mv.setAttribute("poster", `${base}/${id}.jpg`);
     document.getElementById("fallbackImg").src = `${base}/${id}.jpg`;
 
-    mv.addEventListener("error", () => {
+    // coba beberapa lokasi (folder models/ atau root) agar tahan beda struktur
+    const candidates = [...new Set([`${base}/${id}.glb`, `${id}.glb`, `models/${id}.glb`])];
+    let ci = 0;
+    function showFallback() {
       document.getElementById("fallback").style.display = "block";
       mv.style.display = "none";
-    });
+    }
+    function loadNext() {
+      if (ci >= candidates.length) { showFallback(); return; }
+      mv.setAttribute("src", candidates[ci++]);
+    }
+    mv.addEventListener("error", loadNext);
+    loadNext();
 
     let auto = true;
     document.getElementById("reset").addEventListener("click", () => {
